@@ -1,0 +1,187 @@
+:root {
+  color-scheme: light dark;
+  --speed-second: 60s;
+  --speed-minute: calc(60 * var(--speed-second));
+  --speed-hour: calc(60 * var(--speed-minute));
+
+  --timing-linear: linear;
+  --timing-steps: steps(60);
+
+  --timing-second: var(--timing-linear);
+  --timing-minute: var(--timing-steps);
+  --timing-hour: var(--timing-linear);
+
+  --dimension: calc(min(100vh, 100vw) - 4rem);
+
+  --primary: #213547;
+  --secondary: #f2f2f2;
+
+  --bg-color: var(--secondary);
+  --face-color: var(--secondary);
+
+  --indices-color: var(--primary);
+  --indices-color-major: var(--indices-color);
+  --indices-color-minor: var(--indices-color);
+
+  --hand-color: var(--secondary);
+  --hand-border-color: var(--primary);
+
+  --center-color: var(--secondary);
+  --center-border-color: var(--primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #f2f2f2;
+    --secondary: #213547;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+}
+
+.face {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  position: relative;
+  width: var(--dimension);
+  overflow: hidden;
+}
+
+.indices,
+.hands,
+.center {
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  list-style: none;
+}
+
+.indices {
+  width: 0;
+  top: 0%;
+  transform: rotate(calc(var(--index) * 6deg));
+  transform-origin: center center;
+
+  &::after {
+    display: block;
+    content: '';
+    transform: translateX(-50%);
+  }
+}
+
+.major::after {
+  width: calc(var(--dimension) / 50);
+  height: 7%;
+  background-color: var(--indices-color-major);
+}
+
+.minor::after {
+  width: calc(var(--dimension) / 500);
+  height: 5%;
+  background-color: var(--indices-color-minor);
+}
+
+.hands {
+  width: 0;
+  height: 50%;
+  bottom: 50%;
+  position: absolute;
+  transform-origin: bottom;
+  /* Animation */
+  animation: turn var(--speed, 60s) var(--timing, linear) infinite;
+  animation-delay: var(--delay, 0s);
+  isolation: isolate;
+  mix-blend-mode: multiply;
+
+  &::before,
+  &::after {
+    height: var(--hand-height);
+    content: '';
+    position: absolute;
+    transform: translateX(-50%);
+    background-color: var(--hand-color);
+    border: 1px solid var(--hand-border-color);
+    width: var(--hand-width);
+    bottom: 0;
+    border-top-left-radius: var(--hand-width);
+    border-top-right-radius: var(--hand-width);
+  }
+}
+
+.second {
+  --dim: calc(var(--dimension) / 250);
+  --speed: var(--speed-second);
+  --timing: var(--timing-second);
+  --delay: var(--delay-second);
+  --hand-width: var(--dim);
+  --hand-height: 84%;
+
+  &::before {
+    height: calc(100% - var(--hand-height) - 4%);
+    bottom: var(--hand-height);
+  }
+
+  &::before,
+  &::after {
+    background-color: var(--hand-border-color);
+  }
+
+  mix-blend-mode: difference;
+}
+
+.minute {
+  --dim: calc(var(--dimension) / 100);
+  --speed: var(--speed-minute);
+  --timing: var(--timing-minute);
+  --delay: var(--delay-minute);
+  --hand-width: var(--dim);
+  --hand-height: 70%;
+}
+
+.hour {
+  --speed: var(--speed-hour);
+  --timing: var(--timing-hour);
+  --delay: var(--delay-hour);
+  --hand-width: var(--dim);
+  --hand-height: 50%;
+  --dim: calc(var(--dimension) / 50);
+}
+
+
+.center {
+  --radius: 5%;
+  top: 50%;
+  left: 50%;
+  width: var(--radius);
+  height: var(--radius);
+  background-color: var(--center-color);
+  border: 3px solid var(--center-border-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes turn {
+  100% {
+    transform: rotate(1turn);
+  }
+}
