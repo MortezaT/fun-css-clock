@@ -1,8 +1,8 @@
 :root {
   color-scheme: light dark;
-  --speed-second: 60s;
-  --speed-minute: calc(60 * var(--speed-second));
-  --speed-hour: calc(60 * var(--speed-minute));
+  --duration-second: 60s;
+  --duration-minute: calc(60 * var(--duration-second));
+  --duration-hour: calc(60 * var(--duration-minute));
 
   --timing-linear: linear;
   --timing-steps: steps(60);
@@ -68,7 +68,7 @@ body {
 }
 
 .indices,
-.hands,
+.arms,
 .center {
   height: 100%;
   position: absolute;
@@ -101,14 +101,14 @@ body {
   background-color: var(--indices-color-minor);
 }
 
-.hands {
+.arms {
   width: 0;
   height: 50%;
   bottom: 50%;
   position: absolute;
   transform-origin: bottom;
   /* Animation */
-  animation: turn var(--speed, 60s) var(--timing, linear) infinite;
+  animation: turn var(--duration) var(--timing, linear) infinite;
   animation-delay: var(--delay, 0s);
   isolation: isolate;
   mix-blend-mode: multiply;
@@ -130,7 +130,7 @@ body {
 
 .second {
   --dim: calc(var(--dimension) / 250);
-  --speed: var(--speed-second);
+  --duration: var(--duration-second);
   --timing: var(--timing-second);
   --delay: var(--delay-second);
   --hand-width: var(--dim);
@@ -151,7 +151,7 @@ body {
 
 .minute {
   --dim: calc(var(--dimension) / 100);
-  --speed: var(--speed-minute);
+  --duration: var(--duration-minute);
   --timing: var(--timing-minute);
   --delay: var(--delay-minute);
   --hand-width: var(--dim);
@@ -159,7 +159,7 @@ body {
 }
 
 .hour {
-  --speed: var(--speed-hour);
+  --duration: var(--duration-hour);
   --timing: var(--timing-hour);
   --delay: var(--delay-hour);
   --hand-width: var(--dim);

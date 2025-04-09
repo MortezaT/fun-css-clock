@@ -8,40 +8,6 @@
   </head>
   <body>
     <div class="face"></div>
-    <script>
-      (() => {
-        const date = new Date();
-        const delaySecond = date.getSeconds();
-        const delayMinute = date.getMinutes() * 60 + delaySecond;
-        const delayHour = date.getHours() * 60 + delayMinute + delaySecond;
-
-        /**
-         * @type {HTMLDivElement}
-         */
-        const domFace = document.querySelector('.face');
-        if (!domFace) return;
-
-        domFace.style.setProperty('--delay-second', `-${delaySecond}s`)
-        domFace.style.setProperty('--delay-minute', `-${delayMinute}s`)
-        domFace.style.setProperty('--delay-hour', `-${delayHour}s`)
-
-        const indices = Array.from(
-          { length: 60 },
-          (_, i) =>
-            `<div class="indices ${
-              i % 5 ? 'minor' : 'major'
-            }"" style="--index:${i};"></div>`
-        ).join('');
-
-        const hands = `
-<div class="hands hour"></div>
-<div class="hands minute"></div>
-<div class="hands second"></div>
-`;
-        const center = `<div class="center"></div>`;
-
-        domFace.innerHTML += indices + hands + center;
-      })();
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
