@@ -2,7 +2,7 @@
   color-scheme: light dark;
   --duration-second: 60s;
   --duration-minute: calc(60 * var(--duration-second));
-  --duration-hour: calc(60 * var(--duration-minute));
+  --duration-hour: calc(12 * var(--duration-minute));
 
   --timing-linear: linear;
   --timing-steps: steps(60);
